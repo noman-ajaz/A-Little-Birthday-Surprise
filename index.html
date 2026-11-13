@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#180f1b">
+<title>For My Anisha ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --bg:#180f1b;
+ --rose:#f2a9b8;
+ --cream:#fff4eb;
+ --muted:#d8bdc8;
+ --gold:#e9c58b;
+ --card:#ffffff09;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;background:var(--bg);color:var(--cream);
+ font-family:'DM Sans',sans-serif;overflow-x:hidden;
+}
+body.locked{overflow:hidden}
+button{font:inherit}
+
+body:before{
+ content:"";position:fixed;inset:0;pointer-events:none;
+ opacity:.15;
+ background-image:radial-gradient(#fff 1px,transparent 1px);
+ background-size:42px 42px;z-index:-1;
+}
+
+button{cursor:pointer}
+
+/* COMMON */
+
+.btn{
+ border:0;border-radius:999px;padding:15px 27px;
+ background:linear-gradient(135deg,#f4b8c4,#d77e9b);
+ color:#281421;font-weight:700;
+ box-shadow:0 12px 35px #e58da533;
+ transition:.3s;
+}
+.btn:hover{transform:translateY(-4px);box-shadow:0 16px 42px #e58da566}
+
+section{padding:90px 22px}
+.wrap{max-width:1050px;margin:auto}
+
+.section-tag{
+ text-align:center;color:var(--gold);
+ letter-spacing:3px;text-transform:uppercase;font-size:.7rem;
+}
+.section-title{
+ text-align:center;
+ font:600 clamp(2.2rem,6vw,3.6rem) 'Playfair Display',serif;
+ margin:12px 0 15px;
+}
+.section-intro{
+ text-align:center;color:var(--muted);
+ max-width:620px;margin:0 auto 45px;line-height:1.8;
+}
+
+/* PASSWORD */
+
+#lockScreen,#welcomeScreen{
+ position:fixed;inset:0;z-index:9999;
+ display:grid;place-items:center;padding:22px;
+ background:radial-gradient(ellipse at center,#51283d,#180f1b 75%);
+}
+
+.lock-box,.welcome-box{
+ width:100%;max-width:440px;padding:42px 28px;
+ text-align:center;border:1px solid #f2a9b855;
+ border-radius:28px;background:#ffffff0b;
+ box-shadow:0 25px 80px #0008;
+ animation:fade .8s ease;
+}
+
+.lock-icon{font-size:3.5rem}
+.lock-box h1,.welcome-box h1{
+ font:600 2.5rem 'Playfair Display',serif;margin:18px 0 10px;
+}
+.lock-box p,.welcome-box p{
+ color:var(--muted);line-height:1.8;font-size:.9rem;
+}
+.lock-box input{
+ width:100%;padding:15px;margin:18px 0 12px;
+ border:1px solid #f2a9b855;border-radius:12px;
+ outline:none;background:#ffffff0c;color:white;
+ text-align:center;font-size:1rem;letter-spacing:2px;
+}
+.lock-box input:focus{border-color:var(--rose)}
+#errorMessage{color:#ff9caa;font-size:.82rem;min-height:20px}
+
+/* WELCOME GIFT */
+
+#welcomeScreen{display:none;z-index:9998}
+
+.gift{
+ font-size:6rem;display:inline-block;
+ animation:bounce 1.5s infinite;
+ filter:drop-shadow(0 10px 20px #f2a9b855);
+}
+.gift-label{color:var(--gold);letter-spacing:3px;font-size:.75rem}
+
+/* HERO */
+
+.hero{
+ min-height:100svh;display:grid;place-items:center;
+ text-align:center;padding:80px 22px;position:relative;
+ background:radial-gradient(ellipse at 50% 35%,#5b293f,#281725 48%,#180f1b 78%);
+}
+.hero:after{
+ content:"";position:absolute;width:320px;height:320px;
+ border:1px solid #f2a9b833;border-radius:50%;
+ box-shadow:0 0 0 35px #f2a9b80a,0 0 0 70px #f2a9b806;
+ top:50%;left:50%;transform:translate(-50%,-50%);
+ pointer-events:none;
+}
+.hero-content{position:relative;z-index:1;max-width:760px}
+.eyebrow{
+ letter-spacing:4px;text-transform:uppercase;
+ color:var(--gold);font-size:.72rem;
+}
+.hero h1{
+ font:600 clamp(3.2rem,10vw,7rem)/1.02 'Playfair Display',serif;
+ margin:24px 0 18px;
+}
+.hero h1 span{color:var(--rose);font-style:italic}
+.hero p{
+ color:var(--muted);font-size:1.05rem;line-height:1.8;
+ max-width:560px;margin:0 auto 30px;
+}
+.scroll{margin-top:60px;color:#cbaeba;font-size:.8rem;letter-spacing:2px}
+
+/* COUNTDOWN */
+
+.countdown{
+ display:flex;justify-content:center;gap:14px;
+ flex-wrap:wrap;margin:34px 0;
+}
+.timebox{
+ min-width:90px;padding:19px 15px;
+ border:1px solid #f2a9b83d;border-radius:18px;
+ background:#ffffff08;
+}
+.timebox strong{
+ display:block;font:600 2.2rem 'Playfair Display';
+ color:var(--rose);
+}
+.timebox span{
+ font-size:.68rem;color:var(--muted);
+ letter-spacing:2px;text-transform:uppercase;
+}
+.note{text-align:center;color:#d9b8c4;font-size:.85rem}
+
+/* CARDS */
+
+.memories,.gallery,.timeline-section{
+ background:linear-gradient(180deg,#211421,#1b111c);
+}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{
+ border:1px solid #ffffff17;background:var(--card);
+ border-radius:22px;padding:28px 24px;
+ min-height:210px;transition:.3s;
+}
+.card:hover{transform:translateY(-7px);border-color:#f2a9b866}
+.card .icon{font-size:1.8rem}
+.card h3{font:600 1.35rem 'Playfair Display';margin:16px 0 9px}
+.card p{color:var(--muted);font-size:.92rem;line-height:1.7;margin:0}
+
+/* LOVE LETTER */
+
+.letter-area{text-align:center}
+.envelope{
+ max-width:650px;margin:35px auto 0;padding:42px 28px;
+ border:1px solid #e9c58b55;border-radius:24px;
+ background:linear-gradient(145deg,#392033,#241522);
+ box-shadow:0 25px 70px #0005;
+}
+.envelope .seal{font-size:2.7rem}
+.letter{
+ display:none;text-align:left;max-width:570px;
+ margin:24px auto 0;color:#f6dfe5;
+ line-height:1.95;white-space:pre-line;
+}
+.letter.show{display:block;animation:fade .7s ease}
+.letter-sign{
+ font:italic 1.5rem 'Playfair Display';
+ color:var(--rose);margin-top:20px;
+}
+
+/* TIMELINE */
+
+.timeline{
+ max-width:700px;margin:auto;position:relative;
+}
+.timeline:before{
+ content:"";position:absolute;left:22px;top:10px;bottom:10px;
+ width:2px;background:linear-gradient(var(--rose),var(--gold));
+}
+.timeline-item{
+ position:relative;margin:0 0 28px 55px;
+ padding:23px;border:1px solid #ffffff17;
+ border-radius:18px;background:#ffffff08;
+}
+.timeline-item:before{
+ content:"♥";position:absolute;left:-44px;top:22px;
+ color:var(--rose);font-size:1.2rem;
+}
+.timeline-item h3{
+ font:600 1.3rem 'Playfair Display';
+ color:var(--rose);margin:0 0 9px;
+}
+.timeline-item p{color:var(--muted);line-height:1.7;margin:0}
+
+/* GALLERY */
+
+.photo-grid{
+ display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:14px;
+}
+.photo{
+ height:280px;border-radius:20px;overflow:hidden;
+ position:relative;background:linear-gradient(135deg,#714054,#291b2a);
+ display:grid;place-items:center;color:#f8dfe6;text-align:center;
+}
+.photo:first-child{height:340px;grid-row:span 2}
+.photo img{
+ width:100%;height:100%;object-fit:cover;
+ position:absolute;inset:0;transition:.5s;
+}
+.photo:hover img{transform:scale(1.06)}
+.photo span{
+ position:absolute;bottom:15px;background:#1a101bc9;
+ padding:10px 14px;border-radius:12px;font-size:.8rem;z-index:2;
+}
+
+/* VOICE */
+
+.voice-box{
+ max-width:600px;margin:auto;padding:32px;text-align:center;
+ background:#ffffff09;border:1px solid #f2a9b83d;border-radius:24px;
+}
+.voice-box .icon{font-size:2.8rem}
+.voice-box p{color:var(--muted);line-height:1.8}
+.voice-box audio{width:100%;margin-top:15px}
+
+/* CAKE */
+
+.cake-section{text-align:center}
+.cake-box{
+ max-width:550px;margin:auto;padding:35px 20px;
+ background:#ffffff08;border:1px solid #f2a9b844;
+ border-radius:25px;
+}
+.cake{font-size:7rem;line-height:1.5}
+.candle-text{color:var(--muted);line-height:1.7}
+
+/* WISH */
+
+.wish-box{
+ max-width:600px;margin:auto;padding:30px;
+ border:1px solid #e9c58b55;border-radius:24px;
+ background:#ffffff08;text-align:center;
+}
+.wish-box textarea{
+ width:100%;min-height:110px;resize:vertical;
+ margin:18px 0;padding:15px;border-radius:13px;
+ border:1px solid #f2a9b855;background:#ffffff0b;
+ color:white;font:inherit;outline:none;
+}
+#wishResult{color:var(--rose);line-height:1.7;min-height:25px}
+
+/* MUSIC */
+
+.music-player{
+ position:fixed;right:18px;bottom:18px;z-index:100;
+ display:flex;align-items:center;gap:10px;
+ padding:10px 15px;border:1px solid #f2a9b855;
+ border-radius:50px;background:#241522ed;
+ box-shadow:0 8px 25px #0006;
+}
+.music-player button{
+ border:0;background:none;color:var(--rose);font-size:1.3rem;
+}
+.music-player span{font-size:.75rem;color:var(--muted)}
+
+/* FINAL */
+
+.final{
+ padding:100px 22px;text-align:center;
+ background:radial-gradient(ellipse at center,#51283d,#180f1b 68%);
+}
+.final h2{
+ font:600 clamp(2.5rem,7vw,4.5rem) 'Playfair Display';
+ margin:12px 0;
+}
+.final p{
+ color:var(--muted);line-height:1.8;
+ max-width:570px;margin:0 auto 28px;
+}
+.footer{text-align:center;padding:25px;color:#a98d9a;font-size:.75rem}
+.heart{color:var(--rose)}
+
+/* HEARTS AND ANIMATIONS */
+
+.floating-heart{
+ position:fixed;bottom:-30px;pointer-events:none;
+ z-index:10;animation:floatUp linear forwards;
+}
+@keyframes floatUp{
+ to{transform:translateY(-110vh) rotate(360deg);opacity:0}
+}
+@keyframes fade{
+ from{opacity:0;transform:translateY(12px)}
+ to{opacity:1;transform:translateY(0)}
+}
+@keyframes bounce{
+ 0%,100%{transform:translateY(0) rotate(-5deg)}
+ 50%{transform:translateY(-15px) rotate(5deg)}
+}
+
+/* CONFETTI */
+
+.confetti{
+ position:fixed;top:-25px;z-index:10000;
+ pointer-events:none;animation:fall linear forwards;
+}
+@keyframes fall{
+ to{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+
+/* RESPONSIVE */
+
+@media(max-width:720px){
+ section{padding:70px 18px}
+ .cards{grid-template-columns:1fr}
+ .card{min-height:auto}
+ .photo-grid{grid-template-columns:1fr 1fr}
+ .photo:first-child{grid-column:span 2;grid-row:auto;height:280px}
+ .photo{height:190px}
+ .hero:after{width:230px;height:230px}
+ .timebox{min-width:75px;padding:15px 10px}
+ .timebox strong{font-size:1.8rem}
+ .music-player{right:10px;bottom:10px}
+}
+</style>
+</head>
+
+<body class="locked">
+
+<!-- PASSWORD SCREEN -->
+
+<div id="lockScreen">
+ <div class="lock-box">
+  <div class="lock-icon">🔐</div>
+  <h1>Just for You ♡</h1>
+  <p>This little world is made with love.<br>Enter your special password to open your surprise.</p>
+
+  <form id="passwordForm">
+   <input type="password" id="passwordInput"
+    placeholder="Enter your password" autocomplete="off" required>
+   <button class="btn" type="submit">Unlock My Surprise ♡</button>
+  </form>
+
+  <div id="errorMessage"></div>
+  <p style="font-size:.75rem;margin-top:20px">Made with love · Areeb ♡</p>
+ </div>
+</div>
+
+<!-- WELCOME / GIFT SCREEN -->
+
+<div id="welcomeScreen">
+ <div class="welcome-box">
+  <div class="gift">🎁</div>
+  <div class="gift-label">A SPECIAL GIFT FOR YOU</div>
+  <h1>Welcome, My Princess!</h1>
+  <p>
+   My dearest Anisha, someone has prepared
+   a little world full of love just for you.
+   Are you ready?
+  </p>
+  <button class="btn" id="giftBtn">Open Your Gift ♡</button>
+  <p style="margin-top:20px;font-size:.75rem">With love, Areeb ❤️</p>
+ </div>
+</div>
+
+<!-- MAIN HERO -->
+
+<header class="hero" id="top">
+ <div class="hero-content">
+  <div class="eyebrow">A little page, with a whole lot of love</div>
+  <h1>Happy Birthday,<br><span>My Anisha</span> ♡</h1>
+  <p>
+   To the girl who makes ordinary days feel special —
+   today, this little corner of the internet belongs only to you.
+  </p>
+  <button class="btn" id="startBtn">Start Our Celebration ♡</button>
+  <div class="scroll">MADE WITH LOVE · JUST FOR YOU ↓</div>
+ </div>
+</header>
+
+<!-- COUNTDOWN -->
+
+<section>
+ <div class="wrap">
+  <div class="section-tag">The day is all yours</div>
+  <h2 class="section-title">A Little Countdown ✨</h2>
+  <p class="section-intro">
+   Every second is bringing us closer to celebrating you.
+   Someone as special as you deserves more than one day of happiness.
+  </p>
+
+  <div class="countdown">
+   <div class="timebox"><strong id="days">--</strong><span>Days</span></div>
+   <div class="timebox"><strong id="hours">--</strong><span>Hours</span></div>
+   <div class="timebox"><strong id="minutes">--</strong><span>Minutes</span></div>
+   <div class="timebox"><strong id="seconds">--</strong><span>Seconds</span></div>
+  </div>
+
+  <p class="note" id="countdownNote">Counting down to your special day ♡</p>
+ </div>
+</section>
+
+<!-- FAVOURITE THINGS -->
+
+<section class="memories">
+ <div class="wrap">
+  <div class="section-tag">A few things I adore</div>
+  <h2 class="section-title">My Favourite Things About You</h2>
+  <p class="section-intro">
+   I could write a thousand pages, but these little things will always be my favourite.
+  </p>
+
+  <div class="cards">
+   <article class="card">
+    <div class="icon">🌷</div>
+    <h3>Your Smile</h3>
+    <p>It has this magical way of making even my longest days feel lighter.</p>
+   </article>
+   <article class="card">
+    <div class="icon">💖</div>
+    <h3>Your Heart</h3>
+    <p>Your kindness, care and the way you love make life feel warmer.</p>
+   </article>
+   <article class="card">
+    <div class="icon">👩‍❤️‍👨</div>
+    <h3>Our Little World</h3>
+    <p>All the tiny moments, silly talks and memories that are ours alone.</p>
+   </article>
+  </div>
+ </div>
+</section>
+
+<!-- LOVE LETTER -->
+
+<section class="letter-area">
+ <div class="wrap">
+  <div class="section-tag">A note from my heart</div>
+  <h2 class="section-title">One Letter, Just for You 💌</h2>
+  <p class="section-intro">There's something I want you to read. Open it when you're ready.</p>
+
+  <div class="envelope">
+   <div class="seal">💌</div>
+   <button class="btn" id="letterBtn">Open My Letter</button>
+
+   <div class="letter" id="letterText">
+My dearest Anisha,
+
+Happy Birthday, meri jaan! ❤️
+
+I pray that Allah fills your life with endless happiness, good health, peace and success. May every beautiful wish in your heart come true.
+
+Thank you for being my favourite person, my comfort and my biggest reason to smile. I may not always find the perfect words, but I hope you never doubt how much you mean to me.
+
+I want to keep making memories with you — laughing over silly things, supporting each other through every season and choosing each other, again and again.
+
+Today and every day, you deserve all the love in this world.
+
+<div class="letter-sign">Forever yours, Areeb ♡</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- LOVE TIMELINE -->
+
+<section class="timeline-section">
+ <div class="wrap">
+  <div class="section-tag">Our little journey</div>
+  <h2 class="section-title">A Story Called Us ❤️</h2>
+  <p class="section-intro">
+   Some stories are written in books. Our favourite one is written in little moments.
+  </p>
+
+  <div class="timeline">
+   <div class="timeline-item">
+    <h3>🌸 The First Hello</h3>
+    <p>Every beautiful story starts somewhere. Ours became one of my favourites.</p>
+   </div>
+   <div class="timeline-item">
+    <h3>💕 The Little Moments</h3>
+    <p>Every laugh, every conversation and every little memory became special.</p>
+   </div>
+   <div class="timeline-item">
+    <h3>💖 My Favourite Person</h3>
+    <p>Life feels more beautiful with you by my side.</p>
+   </div>
+   <div class="timeline-item">
+    <h3>♾️ Our Forever</h3>
+    <p>And this is only the beginning of all the beautiful memories still waiting for us.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+
+<section class="gallery">
+ <div class="wrap">
+  <div class="section-tag">Our memories</div>
+  <h2 class="section-title">Little Moments, Big Feelings</h2>
+  <p class="section-intro">
+   Every picture holds a memory, and every memory holds a little piece of my heart.
+  </p>
+
+  <div class="photo-grid">
+   <div class="photo">
+    <img src="assets/photo-1.jpeg" alt="Our memory" onerror="this.style.display='none'">
+    <span>Our Beautiful Memory ♡</span>
+   </div>
+   <div class="photo">
+    <img src="assets/photo-2.jpeg" alt="Our memory" onerror="this.style.display='none'">
+    <span>My Favourite Person</span>
+   </div>
+   <div class="photo">
+    <img src="assets/photo-3.jpeg" alt="Our memory" onerror="this.style.display='none'">
+    <span>Forever Together</span>
+   </div>
+   <div class="photo">
+    <img src="assets/photo-4.jpeg" alt="Our memory" onerror="this.style.display='none'">
+    <span>Little Happiness</span>
+   </div>
+   <div class="photo">
+    <img src="assets/photo-5.jpeg" alt="Our memory" onerror="this.style.display='none'">
+    <span>Just You & Me</span>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- VOICE MESSAGE -->
+
+<section>
+ <div class="wrap">
+  <div class="section-tag">A special message</div>
+  <h2 class="section-title">Listen to My Heart 🎙️</h2>
+  <p class="section-intro">Sometimes words are not enough. So here's a little message from me.</p>
+
+  <div class="voice-box">
+   <div class="icon">🎧</div>
+   <h3 style="font-family:'Playfair Display';font-size:1.5rem">A Voice Note From Areeb</h3>
+   <p>Press play and listen to my little message for you. ❤️</p>
+   <audio controls preload="none">
+    <source src="assets/voice.mp3" type="audio/mpeg">
+   </audio>
+  </div>
+ </div>
+</section>
+
+<!-- BIRTHDAY CAKE -->
+
+<section class="cake-section">
+ <div class="wrap">
+  <div class="section-tag">A birthday tradition</div>
+  <h2 class="section-title">Make a Wish, Princess! 🎂</h2>
+  <p class="section-intro">
+   Close your eyes, make a beautiful wish and blow out your candles.
+  </p>
+
+  <div class="cake-box">
+   <div class="cake" id="cake">🎂</div>
+   <p class="candle-text" id="cakeMessage">
+    Three little candles, a thousand beautiful wishes.
+   </p>
+   <button class="btn" id="blowBtn">Blow Out The Candles ✨</button>
+  </div>
+ </div>
+</section>
+
+<!-- WISH BOX -->
+
+<section>
+ <div class="wrap">
+  <div class="section-tag">A wish from your heart</div>
+  <h2 class="section-title">What's Your Birthday Wish? 🌙</h2>
+  <p class="section-intro">
+   Write a little wish for your new year. Keep it close to your heart.
+  </p>
+
+  <div class="wish-box">
+   <div style="font-size:2.5rem">💗</div>
+   <textarea id="wishInput" placeholder="My birthday wish is..."></textarea>
+   <button class="btn" id="wishBtn">Send My Wish ♡</button>
+   <p id="wishResult"></p>
+  </div>
+ </div>
+</section>
+
+<!-- FINAL -->
+
+<section class="final">
+ <div class="section-tag">And one last thing...</div>
+ <h2>You're My Favourite<br>
+  <span style="color:var(--rose);font-style:italic">Kind of Forever.</span>
+ </h2>
+ <p>
+  May this new chapter be as beautiful as your soul.
+  Keep smiling, keep shining, and never forget that you are loved more than words can say.
+ </p>
+
+ <button class="btn" id="celebrateBtn">Make a Wish ✨</button>
+
+ <p style="margin-top:22px;color:#d9a9ba">
+  Happy Birthday, Anisha! <span class="heart">♥</span>
+ </p>
+
+ <h3 style="color:var(--rose);font-family:'Playfair Display';margin-top:35px">
+  I Love My Wife ♡
+ </h3>
+</section>
+
+<footer class="footer">
+ A little surprise made with love · Areeb ♡
+</footer>
+
+<!-- MUSIC PLAYER -->
+
+<div class="music-player">
+ <button id="musicToggle" aria-label="Play or pause music">▶</button>
+ <span id="musicStatus">Our Song ♡</span>
+</div>
+
+<audio id="bgMusic" src="assets/music.mp3" preload="none" loop></audio>
+
+<script>
+
+/* SETTINGS */
+
+const WEBSITE_PASSWORD = "iloveyou";
+
+// Birthday date and local time
+const birthdayDate = "2026-11-13T12:00:00";
+
+// Start music at 1 minute 10 seconds
+const musicStartAt = 70;
+
+const music = document.getElementById("bgMusic");
+
+let musicStarted = false;
+
+
+/* PASSWORD */
+
+const lockScreen = document.getElementById("lockScreen");
+const welcomeScreen = document.getElementById("welcomeScreen");
+
+document.getElementById("passwordForm").addEventListener("submit",function(e){
+ e.preventDefault();
+
+ const entered = document.getElementById("passwordInput").value;
+
+ if(entered === WEBSITE_PASSWORD){
+
+  lockScreen.style.display = "none";
+  welcomeScreen.style.display = "grid";
+
+ }else{
+
+  document.getElementById("errorMessage").textContent =
+   "Oops! Wrong password. Try again, princess ♡";
+
+  document.getElementById("passwordInput").value = "";
+
+ }
+});
+
+
+/* OPEN GIFT */
+
+document.getElementById("giftBtn").addEventListener("click",()=>{
+
+ welcomeScreen.style.display = "none";
+
+ document.body.classList.remove("locked");
+
+ window.scrollTo({top:0,behavior:"smooth"});
+
+ confetti();
+
+});
+
+
+/* START CELEBRATION */
+
+document.getElementById("startBtn").addEventListener("click",async()=>{
+
+ await playMusic();
+
+ document.getElementById("startBtn").textContent =
+  "Enjoy Our Celebration ♡";
+
+ document.getElementById("countdownNote").scrollIntoView({
+  behavior:"smooth",block:"center"
+ });
+
+});
+
+
+/* MUSIC FUNCTIONS */
+
+async function playMusic(){
+
+ try{
+
+  if(!musicStarted){
+   music.currentTime = musicStartAt;
+   musicStarted = true;
+  }
+
+  await music.play();
+
+  document.getElementById("musicToggle").textContent = "❚❚";
+  document.getElementById("musicStatus").textContent = "Now Playing ♡";
+
+ }catch(error){
+
+  document.getElementById("musicStatus").textContent =
+   "Add music.mp3 ♡";
+
+ }
+
+}
+
+function pauseMusic(){
+
+ music.pause();
+
+ document.getElementById("musicToggle").textContent = "▶";
+ document.getElementById("musicStatus").textContent = "Music Paused";
+
+}
+
+document.getElementById("musicToggle").addEventListener("click",()=>{
+
+ if(music.paused) playMusic();
+ else pauseMusic();
+
+});
+
+
+/* COUNTDOWN */
+
+function updateCountdown(){
+
+ const target = new Date(birthdayDate).getTime();
+ const now = Date.now();
+
+ if(Number.isNaN(target)) return;
+
+ let diff = target-now;
+
+ if(diff <= 0){
+
+  document.getElementById("countdownNote").textContent =
+   "It's your special day! Happy Birthday, Anisha! ♡";
+
+  diff=0;
+
+ }
+
+ const d=Math.floor(diff/86400000);
+ const h=Math.floor(diff%86400000/3600000);
+ const m=Math.floor(diff%3600000/60000);
+ const s=Math.floor(diff%60000/1000);
+
+ document.getElementById("days").textContent=d;
+ document.getElementById("hours").textContent=h;
+ document.getElementById("minutes").textContent=m;
+ document.getElementById("seconds").textContent=s;
+
+}
+
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+
+/* LOVE LETTER */
+
+document.getElementById("letterBtn").addEventListener("click",()=>{
+
+ const letter=document.getElementById("letterText");
+
+ letter.classList.toggle("show");
+
+ document.getElementById("letterBtn").textContent =
+  letter.classList.contains("show")
+  ? "Close My Letter"
+  : "Open My Letter";
+
+});
+
+
+/* FLOATING HEARTS */
+
+function floatingHearts(){
+
+ if(document.body.classList.contains("locked")) return;
+
+ const hearts=["💗","💕","💖","❤️","🌸","🌹"];
+
+ const heart=document.createElement("div");
+
+ heart.className="floating-heart";
+
+ heart.textContent=hearts[Math.floor(Math.random()*hearts.length)];
+
+ heart.style.left=Math.random()*100+"vw";
+
+ heart.style.fontSize=(15+Math.random()*20)+"px";
+
+ heart.style.animationDuration=(5+Math.random()*5)+"s";
+
+ document.body.appendChild(heart);
+
+ setTimeout(()=>heart.remove(),10000);
+
+}
+
+setInterval(floatingHearts,1400);
+
+
+/* BIRTHDAY CAKE */
+
+document.getElementById("blowBtn").addEventListener("click",()=>{
+
+ document.getElementById("cake").textContent="🍰";
+
+ document.getElementById("cakeMessage").textContent =
+  "Your candles are out! May every wish in your heart come true. ❤️";
+
+ document.getElementById("blowBtn").textContent =
+  "Happy Birthday, Anisha! ♡";
+
+ confetti();
+
+});
+
+
+/* WISH BOX */
+
+document.getElementById("wishBtn").addEventListener("click",()=>{
+
+ const wish=document.getElementById("wishInput").value.trim();
+
+ if(!wish){
+
+  document.getElementById("wishResult").textContent =
+   "Write your beautiful wish first, princess ♡";
+
+  return;
+
+ }
+
+ document.getElementById("wishResult").textContent =
+  "Your wish is sent to the universe! May it come true. 🌙❤️";
+
+ document.getElementById("wishInput").value="";
+
+ confetti();
+
+});
+
+
+/* CONFETTI */
+
+function confetti(){
+
+ const emojis=["💗","✨","🌸","💕","🎀","♥","🥰","🌹"];
+
+ for(let i=0;i<75;i++){
+
+  const el=document.createElement("span");
+
+  el.className="confetti";
+
+  el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+
+  el.style.left=Math.random()*100+"vw";
+
+  el.style.fontSize=(14+Math.random()*20)+"px";
+
+  el.style.animationDuration=(2+Math.random()*3)+"s";
+
+  document.body.appendChild(el);
+
+  setTimeout(()=>el.remove(),5500);
+
+ }
+
+}
+
+
+/* GRAND CELEBRATION */
+
+document.getElementById("celebrateBtn").addEventListener("click",()=>{
+
+ confetti();
+
+ document.getElementById("celebrateBtn").textContent =
+  "Wish Sent To The Universe ♡";
+
+ document.getElementById("celebrateBtn").scrollIntoView({
+  behavior:"smooth",block:"center"
+ });
+
+});
+
+</script>
+
+</body>
+</html>
